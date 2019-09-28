@@ -373,7 +373,7 @@ const booleanInput = function(name, def) {
 			);
 
 		}else{
-			
+
 			return (
 				'<label class="switch">' +
 				'<input type="checkbox" id="' +
@@ -707,7 +707,7 @@ if(nodes[i][1].search(id) != -1) {
 	i--;
 	list--;
 }
-		} 
+		}
 	}}
 };
 
@@ -779,7 +779,7 @@ const functions = function(jsonData) {
 				}else{
 					this.settings[this.settingsCount].push([x, new decInput(nam[j],0)]);
 		}
-				
+
 					break;
 				case "int":
 					if(typeof(this.rawArr[i][2][x].params.default)!="undefined"){
@@ -787,7 +787,7 @@ const functions = function(jsonData) {
 					}else{
 						this.settings[this.settingsCount].push([x, new intInput(nam[j],0)]);
 			}
-					
+
 					break;
 				case "str":
 						if(typeof(this.rawArr[i][2][x].params.default)!="undefined"){

@@ -1,270 +1,271 @@
 {
-	"funcs": [
-		{
-			"name": "Add",
-			"type": "demo.six/Add",
-			"settings": {
-				"dec":{
-					"type":"dec",
-					"params":{
-					}
-				},
-				"int":{
-					"type":"int",
-					"params":{
-						"min":0,
-						"max":1,
-						"dec":"true",
-						"slider":"true"
-					}
-				},
-				"string":{
-					"type":"str",
-					"params":{
-					}
-				},
-				"boolean":{
-					"type":"boolean",
-					"params":{
-					}
-				},
-				"slide":{
-					"type":"slide",
-					"params":{
-						"min":0,
-						"max":100
-					}
-				},
-				"range":{
-					"type":"range",
-					"params":{
-						"min":0,
-						"max":255
-					}
-				},
-				"box":{
-					"type":"box",
-					"params":{
-						"options":["option1","option2","option3"]
-					}
-				}
-			},
-			"inputs": {
-				"num1": {
-					"type": "dec",
-					"params": {}
-				},
-				"num2": {
-					"type": "dec",
-					"params": {}
-				}
-			},
-			"outputs": {
-				"sum": {
-					"type": "dec",
-					"params": {}
-				}
-			}
-		},
-		{
-			"name": "Concat",
-			"type": "demo.six/Concat",
-			"settings": {},
-			"inputs": {
-				"str1": {
-					"type": "str",
-					"params": {}
-				},
-				"str2": {
-					"type": "str",
-					"params": {}
-				}
-			},
-			"outputs": {
-				"out": {
-					"type": "str",
-					"params": {}
-				}
-			}
-		},
-		{
-			"name": "Divide",
-			"type": "demo.six/Divide",
-			"settings": {},
-			"inputs": {
-				"num1": {
-					"type": "int",
-					"params": {}
-				},
-				"num2": {
-					"type": "int",
-					"params": {}
-				}
-			},
-			"outputs": {
-				"quotient": {
-					"type": "int",
-					"params": {}
-				}
-			}
-		},
-		{
-			"name": "Multiply",
-			"type": "demo.six/Multiply",
-			"settings": {},
-			"inputs": {
-				"num1": {
-					"type": "int",
-					"params": {}
-				},
-				"num2": {
-					"type": "int",
-					"params": {}
-				}
-			},
-			"outputs": {
-				"product": {
-					"type": "int",
-					"params": {}
-				}
-			}
-		},
-		{
-			"name": "Number",
-			"type": "demo.six/Number",
-			"settings": {
-				"val": {
-					"type": "int",
-					"params": {
-						"default":1
-					}
-				}
-			},
-			"inputs": {},
-			"outputs": {
-				"val": {
-					"type": "int",
-					"params": {}
-				}
-			}
-		},
-		{
-			"name": "Two Numbers",
-			"type": "demo.six/Number2",
-			"settings": {
-				"val": {
-					"type": "int",
-					"params": {}
-				},
-				"val2": {
-					"type": "int",
-					"params": {}
-				}
-			},
-			"inputs": {},
-			"outputs": {
-				"val": {
-					"type": "int",
-					"params": {}
-				},
-				"val2": {
-					"type": "int",
-					"params": {}
-				}
-			}
-		},
-		{
-			"name": "Print",
-			"type": "demo.six/Print",
-			"settings": {},
-			"inputs": {
-				"val": {
-					"type": "str",
-					"params": {}
-				}
-			},
-			"outputs": {}
-		},
-		{
-			"name": "String",
-			"type": "demo.six/String",
-			"settings": {
-				"val": {
-					"type": "str",
-					"params": {}
-				}
-			},
-			"inputs": {},
-			"outputs": {
-				"val": {
-					"type": "str",
-					"params": {}
-				}
-			}
-		},
-		{
-			"name": "Subtract",
-			"type": "demo.six/Subtract",
-			"settings": {},
-			"inputs": {
-				"num1": {
-					"type": "int",
-					"params": {}
-				},
-				"num2": {
-					"type": "int",
-					"params": {}
-				}
-			},
-			"outputs": {
-				"difference": {
-					"type": "int",
-					"params": {}
-				}
-			}
-		},
-		{
-			"name": "ToString",
-			"type": "demo.six/ToString",
-			"settings": {},
-			"inputs": {
-				"number": {
-					"type": "int",
-					"params": {}
-				}
-			},
-			"outputs": {
-				"string": {
-					"type": "str",
-					"params": {}
-				}
-			}
-		},
-		{
-			"name": "IsInRange",
-			"type": "demo.seven/IsInRange",
-			"settings": {
-				"range": {
-					"type": "Range",
-					"params": {
-						"min": 0.0,
-						"max": 100.0,
-						"decimal": true
-					}
-				}
-			},
-			"inputs": {
-				"num": {
-					"type": "float",
-					"params": {}
-				}
-			},
-			"outputs": {
-				"in_range": {
-					"type": "bool",
-					"params": {}
-				}
-			}
-		}
-	]
+  "funcs": [
+    {
+      "inputs": {
+        "num1": {
+          "params": {},
+          "type": "dec"
+        },
+        "num2": {
+          "params": {},
+          "type": "dec"
+        }
+      },
+      "name": "Add",
+      "outputs": {
+        "sum": {
+          "params": {},
+          "type": "dec"
+        }
+      },
+      "settings": {
+        "boolean": {
+          "params": {},
+          "type": "boolean"
+        },
+        "box": {
+          "params": {
+            "options": [
+              "option1",
+              "option2",
+              "option3"
+            ]
+          },
+          "type": "box"
+        },
+        "dec": {
+          "params": {},
+          "type": "dec"
+        },
+        "int": {
+          "params": {
+            "dec": "true",
+            "max": 1,
+            "min": 0,
+            "slider": "true"
+          },
+          "type": "int"
+        },
+        "range": {
+          "params": {
+            "max": 255,
+            "min": 0
+          },
+          "type": "range"
+        },
+        "slide": {
+          "params": {
+            "max": 100,
+            "min": 0
+          },
+          "type": "slide"
+        },
+        "string": {
+          "params": {},
+          "type": "str"
+        }
+      },
+      "type": "demo.six/Add"
+    },
+    {
+      "inputs": {
+        "str1": {
+          "params": {},
+          "type": "str"
+        },
+        "str2": {
+          "params": {},
+          "type": "str"
+        }
+      },
+      "name": "Concat",
+      "outputs": {
+        "out": {
+          "params": {},
+          "type": "str"
+        }
+      },
+      "settings": {},
+      "type": "demo.six/Concat"
+    },
+    {
+      "inputs": {
+        "num1": {
+          "params": {},
+          "type": "int"
+        },
+        "num2": {
+          "params": {},
+          "type": "int"
+        }
+      },
+      "name": "Divide",
+      "outputs": {
+        "quotient": {
+          "params": {},
+          "type": "int"
+        }
+      },
+      "settings": {},
+      "type": "demo.six/Divide"
+    },
+    {
+      "inputs": {
+        "num1": {
+          "params": {},
+          "type": "int"
+        },
+        "num2": {
+          "params": {},
+          "type": "int"
+        }
+      },
+      "name": "Multiply",
+      "outputs": {
+        "product": {
+          "params": {},
+          "type": "int"
+        }
+      },
+      "settings": {},
+      "type": "demo.six/Multiply"
+    },
+    {
+      "inputs": {},
+      "name": "Number",
+      "outputs": {
+        "val": {
+          "params": {},
+          "type": "int"
+        }
+      },
+      "settings": {
+        "val": {
+          "params": {
+            "default": 1
+          },
+          "type": "int"
+        }
+      },
+      "type": "demo.six/Number"
+    },
+    {
+      "inputs": {},
+      "name": "Two Numbers",
+      "outputs": {
+        "val": {
+          "params": {},
+          "type": "int"
+        },
+        "val2": {
+          "params": {},
+          "type": "int"
+        }
+      },
+      "settings": {
+        "val": {
+          "params": {},
+          "type": "int"
+        },
+        "val2": {
+          "params": {},
+          "type": "int"
+        }
+      },
+      "type": "demo.six/Number2"
+    },
+    {
+      "inputs": {
+        "val": {
+          "params": {},
+          "type": "str"
+        }
+      },
+      "name": "Print",
+      "outputs": {},
+      "settings": {},
+      "type": "demo.six/Print"
+    },
+    {
+      "inputs": {},
+      "name": "String",
+      "outputs": {
+        "val": {
+          "params": {},
+          "type": "str"
+        }
+      },
+      "settings": {
+        "val": {
+          "params": {},
+          "type": "str"
+        }
+      },
+      "type": "demo.six/String"
+    },
+    {
+      "inputs": {
+        "num1": {
+          "params": {},
+          "type": "int"
+        },
+        "num2": {
+          "params": {},
+          "type": "int"
+        }
+      },
+      "name": "Subtract",
+      "outputs": {
+        "difference": {
+          "params": {},
+          "type": "int"
+        }
+      },
+      "settings": {},
+      "type": "demo.six/Subtract"
+    },
+    {
+      "inputs": {
+        "number": {
+          "params": {},
+          "type": "int"
+        }
+      },
+      "name": "ToString",
+      "outputs": {
+        "string": {
+          "params": {},
+          "type": "str"
+        }
+      },
+      "settings": {},
+      "type": "demo.six/ToString"
+    },
+    {
+      "inputs": {
+        "num": {
+          "params": {},
+          "type": "float"
+        }
+      },
+      "name": "IsInRange",
+      "outputs": {
+        "in_range": {
+          "params": {},
+          "type": "bool"
+        }
+      },
+      "settings": {
+        "range": {
+          "params": {
+            "decimal": true,
+            "max": 100.0,
+            "min": 0.0
+          },
+          "type": "Range"
+        }
+      },
+      "type": "demo.seven/IsInRange"
+    }
+  ]
 }
