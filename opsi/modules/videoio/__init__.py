@@ -1,11 +1,15 @@
 from dataclasses import dataclass
+import sys
+import glob
 
 from opsi.manager.manager_schema import Function
 from opsi.manager.types import Mat
 from opsi.util.unduplicator import Unduplicator
 
+from .input import Camera
 from .cameraserver import CameraSource, CamHook
-from .input import controls, create_capture, get_modes, parse_camstring
+
+# from .input import controls, create_capture, get_modes, parse_camstring
 
 __package__ = "opsi.videoio"
 __version__ = "0.123"
@@ -14,40 +18,26 @@ UndupeInstance = Unduplicator()
 HookInstance = CamHook()
 
 
-class CameraInput(Function):
-    def on_start(self):
-        camNum = parse_camstring(self.settings.mode)[0]
-        if not UndupeInstance.add(camNum):
-            raise ValueError(f"Camera {camNum} already in use")
+def safe_int(inp):
+    try:
+        return int(inp)
+    except ValueError:
+        return inp
 
-        self.cap = create_capture(self.settings)
-        self.cap.read()  # test for errors
 
-    @dataclass
-    class Settings:
-        mode: get_modes()
-        brightness: int = 50
-        contrast: int = 50
-        saturation: int = 50
-        exposure: int = 50
-        width: controls() = None
-        height: controls() = None
-        fps: controls(True) = None
+def get_cameras():
+    # get camera list, convert to int if possible (allow implmentations to appropriately deal with non-ints)
+    cam_list = (
+        safe_int(cam.replace("/dev/video", "")) for cam in glob.glob("/dev/video*")
+    )
+    cls_list = [type(f"Camera{i}", (Camera, Function), {"ID": i}) for i in cam_list]
+    return cls_list
 
-    @dataclass
-    class Outputs:
-        img: Mat
 
-    def run(self, inputs):
-        frame = None
-        if self.cap:
-            ret, frame = self.cap.read()
-            frame = frame.view(Mat)
-        return self.Outputs(img=frame)
-
-    def dispose(self):
-        camNum = parse_camstring(self.settings.mode)[0]
-        UndupeInstance.remove(camNum)
+for i in get_cameras():
+    setattr(sys.modules[__name__], i.__name__, i)
+# unset i so it is not accidentally as a member
+i = None
 
 
 class CameraServer(Function):
