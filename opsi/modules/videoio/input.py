@@ -12,13 +12,27 @@ LOGGER = logging.getLogger(__name__)
 
 __package__ = "opsi.input"
 
-# ENABLE_RES = False
-# ENABLE_FPS = False
+CODECS = {
+    "video/x-h264": "X264",
+    "video/x-raw": ("YUYV", "I420", "YUY2"),
+    "image/jpeg": "MJPG",
+}
+
+
+def get_fourcc(filetype, fmt):
+    codec = CODECS[filetype]
+    if type(codec) is tuple:
+        if fmt in codec:
+            codec = fmt
+        else:
+            return None
+    return cv2.VideoWriter_fourcc(*codec)
 
 
 class Camera:
     def on_start(self):
         assert type(self.ID) is int
+        self.get_modes()
         self.cap = cv2.VideoCapture(self.ID)
 
     @dataclass
@@ -32,6 +46,51 @@ class Camera:
     @dataclass
     class Settings:
         pass
+
+    def __get_info__(self):
+        try:
+            gst = subprocess.Popen(
+                f"timeout 0.2 gst-launch-1.0 --gst-debug=v4l2src:5 v4l2src device=/dev/video{self.ID} ! fakesink".split(),
+                stdout=subprocess.PIPE,
+                stderr=subprocess.STDOUT,
+            )
+            out = subprocess.check_output(
+                ["sed", "-une", r"/caps of src/ s/[:;] /\n/gp"],
+                stdin=gst.stdout,
+                universal_newlines=True,
+            )
+            print(out)
+            return str(out)
+        except subprocess.CalledProcessError as e:
+            pass
+        return None
+
+    def get_modes(self):
+        # today i will have two problems
+        regex = r"(\w+\/[\da-z-]+), (?:stream-)?(?:format=\(string\)([\w-]+), )?(?:.+)?(?:width=\(int\)(\[[\d ,]+\]|\d+)), (?:height=\(int\)(\[[\d ,]+\]|\d+)), (?:framerate=\(fraction\)([\{\}\[\]\d \/,]+))"
+        info = self.__get_info__()
+        if not info:
+            return None
+        modes = []
+        for match in re.finditer(regex, info):
+            mode = {}
+            mode["fourcc"] = get_fourcc(match.group(1), match.group(2))
+            if not mode["fourcc"]:
+                continue
+            mode["format"] = match.group(2)
+
+            width = list(
+                map(int, match.group(3).strip("\{\}[]").replace(",", "").split())
+            )
+            height = list(
+                map(int, match.group(4).strip("\{\}[]").replace(",", "").split())
+            )
+            if len(width) == 1 and len(height) == 1:
+                mode["resolutions"] = (width[0], height[0])
+
+            mode["fps"] = match.group(5).strip("\{\}[]").replace(",", "").split()
+            modes.append(mode)
+        print(modes)
 
     def run(self, inputs):
         frame = None
