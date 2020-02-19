@@ -100,6 +100,10 @@ class Manager:
             LOGGER.error(f"Only one Hook per module allowed: {info.package}")
             return
 
+        x = dict(inspect.getmembers(module)).get("post_hook")
+        if x:
+            x()
+
         funcs_tuple: List[Tuple[str, Type[Function]]]
         funcs_tuple = inspect.getmembers(module, Manager.is_valid_function(module))
 
