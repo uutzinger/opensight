@@ -217,5 +217,7 @@ def create_capture(settings):
     set_property(cv2.CAP_PROP_CONTRAST, settings.contrast)
     set_property(cv2.CAP_PROP_SATURATION, settings.saturation)
     set_property(cv2.CAP_PROP_EXPOSURE, settings.exposure)
+    set_property(cv2.CAP_PROP_AUTO_EXPOSURE, 0)  # enable auto-exposure, unintuitively
+    set_property(cv2.CAP_PROP_AUTO_WB, 1)  # enable auto white balance
 
     return cap
