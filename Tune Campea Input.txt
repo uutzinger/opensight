@@ -1,0 +1,9 @@
+
+sudo systemctl stop opensight-server.service
+sudo systemctl stop opensight.service
+
+sudo nano /usr/lib/python3/dist-packages/opsi/modules/videoio/input.py
+
+sudo systemctl start opensight-server.service
+sudo systemctl start opensight.service
+

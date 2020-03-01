@@ -1,0 +1,5 @@
+sudo nano /boot/config.txt
+dtoverlay=disable-wifi
+
+sudo systemctl stop opensight.service
+sudo systemctl stop opensight-server.service
